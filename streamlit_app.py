@@ -14,9 +14,23 @@ st.set_page_config(
 
 st.markdown(
     """
+    <div style="
+        background-color: rgba(250, 249, 246, 0.85); 
+        padding: 40px; 
+        border-radius: 25px; 
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+        text-align: center;
+        margin: 20px auto;
+        max-width: 800px;
+    ">
+
+
+
     <h1 style='text-align: center; font-family: "Trebuchet MS", sans-serif; color: black;'>
         Welcome to our books recomendation app !!
     </h1>
+
+    </div>
     """, 
     unsafe_allow_html=True
 )
