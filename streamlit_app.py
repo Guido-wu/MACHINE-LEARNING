@@ -49,12 +49,12 @@ st.markdown(
     <style>
     .stApp {
         background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-        url("data:image/jpg;base64,{img_base64}");
+        url("data:image/jpeg;base64,{img_base64}");
         background-attachment: fixed;
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
     }
-    
+
     </style>
     """,
     unsafe_allow_html=True
