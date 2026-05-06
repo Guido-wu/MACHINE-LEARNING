@@ -49,7 +49,7 @@ st.markdown(
     <style>
     .stApp {
         background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-        url("data:image/jpg;base64,{img_base64}");
+        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
         background-attachment: fixed;
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
@@ -57,7 +57,7 @@ st.markdown(
 
     </style>
     """,
-    
+
     unsafe_allow_html=True
 )
 
