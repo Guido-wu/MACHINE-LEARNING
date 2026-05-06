@@ -13,7 +13,7 @@ st.set_page_config(
 
 st.markdown(
     """
-    <h1 style='text-align: center; font-family: "Trebuchet MS", sans-serif; color: white;'>
+    <h1 style='text-align: center; font-family: "Trebuchet MS", sans-serif; color: black;'>
         Welcome to our books recomendation app !!
     </h1>
     """, 
