@@ -92,18 +92,31 @@ st.markdown(
 
 st.divider()
 
+#Creation d'une fonction bloc pour séparer les différentes sections de l'application
+
+def bloc_style(titre, contenu):
+    return f"""
+    <div style="
+        background-color: rgba(250, 249, 246, 0.85); 
+        padding: 20px; 
+        border-radius: 15px; 
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.08);
+        text-align: center;
+        height: 200px;
+    ">
+        <h3 style="color: #FF4B4B;">{titre}</h3>
+        <p style="color: #31333F;">{contenu}</p>
+    </div>
+    """
+
+
 col1, col2 = st.columns(2)
 
 with col1:
-    st.header("Colonne de gauche")
-    st.write("Tu peux mettre des graphiques, du texte ou des widgets ici.")
-    st.button("Bouton de gauche")
+    st.markdown(bloc_style("Bloc Gauche", "Infos importantes ici"), unsafe_allow_html=True)
 
 with col2:
-    st.header("Colonne de droite")
-    st.write("Ici, on peut mettre une image ou d'autres données.")
-    st.checkbox("Coche-moi")
-
+    st.markdown(bloc_style("Bloc Droite", "Autres données ici"), unsafe_allow_html=True)
 
 
 with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
