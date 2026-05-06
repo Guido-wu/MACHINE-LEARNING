@@ -88,3 +88,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
+st.divider()
+
+
+with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
+    st.write("Ici, on mettra les filtres de livres (Genre, Auteur, etc.)")
+    choix = st.selectbox("Quel style aimes-tu ?", ["Thriller", "Roman", "SF"])
