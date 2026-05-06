@@ -54,6 +54,7 @@ st.markdown(
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
     }
+    
     </style>
     """,
     unsafe_allow_html=True
