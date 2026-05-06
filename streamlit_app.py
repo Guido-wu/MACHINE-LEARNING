@@ -10,6 +10,35 @@ st.set_page_config(
     layout="wide"
 )
 
+
+#Ajout d'une image de background dans l'application
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+
+img_base64 = get_base64_of_bin_file('Biblio.jpeg')
+
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-attachment: fixed;
+        background-size: cover;
+        backdrop-filter: blur(5px); /* Ajoute un léger flou */
+    }
+
+    </style>
+    """,
+
+    unsafe_allow_html=True
+)
+
+
+
 # Style pour le titre et le sous-titre
 
 st.markdown(
@@ -40,8 +69,7 @@ st.markdown(
 
 
 
-
-
+# ajout d'une flèche rebond pour notre bouton de scroll
 
 #Ajout d'une image de background dans l'application
 def get_base64_of_bin_file(bin_file):
@@ -68,5 +96,4 @@ st.markdown(
 
     unsafe_allow_html=True
 )
-
 
