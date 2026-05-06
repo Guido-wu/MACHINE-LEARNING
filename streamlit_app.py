@@ -24,25 +24,19 @@ st.markdown(
         max-width: 800px;
     ">
 
-
-
     <h1 style='text-align: center; font-family: "Trebuchet MS", sans-serif; color: black;'>
         Welcome to our books recomendation app !!
     </h1>
+
+    <p style='text-align: center; font-family: "Courier New", monospace; font-size: 20px;'>
+    Find the book that fits you the best !
+    </p>
 
     </div>
     """, 
     unsafe_allow_html=True
 )
 
-st.markdown(
-    """
-    <p style='text-align: center; font-family: "Courier New", monospace; font-size: 20px;'>
-    Find the book that fits you the best !
-    </p>
-    """, 
-    unsafe_allow_html=True
-)
 
 
 
