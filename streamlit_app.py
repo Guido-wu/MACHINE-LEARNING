@@ -54,12 +54,6 @@ st.markdown(
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
     }
-
-    /* Optionnel : Assure-toi que ton texte est bien noir/sombre pour le contraste */
-    h1, p {
-        color: #1A1A1A !important;
-        text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
-    }
     </style>
     """,
     unsafe_allow_html=True
