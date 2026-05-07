@@ -25,7 +25,7 @@ st.markdown(
     <style>
     .stApp {
         background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        url(https://mediatheques.haute-saone.fr/lire-ecouter-voir/coups-de-coeur/748-les-plus-belles-bibliotheques-du-monde);
         background-attachment: fixed;
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
@@ -70,7 +70,7 @@ st.markdown(
 
 
 # ajout d'une flèche rebond pour notre bouton de scroll
-for _ in range(15):
+for _ in range(20):
     st.write("")
 
 st.markdown(
@@ -113,7 +113,11 @@ def bloc_style(titre, contenu):
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown(bloc_style("Bloc Gauche", "Infos importantes ici"), unsafe_allow_html=True)
+    st.markdown(bloc_style(
+        "New user - Get a recommandation", 
+        "Click here to get a personalized book recommendation based on your preferences!"
+        ), 
+        unsafe_allow_html=True)
 
 with col2:
     st.markdown(bloc_style("Bloc Droite", "Autres données ici"), unsafe_allow_html=True)
