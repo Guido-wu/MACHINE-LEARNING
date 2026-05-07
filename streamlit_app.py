@@ -25,7 +25,7 @@ st.markdown(
     <style>
     .stApp {
         background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-        url(https://mediatheques.haute-saone.fr/lire-ecouter-voir/coups-de-coeur/748-les-plus-belles-bibliotheques-du-monde);
+        url(https://mediatheques.haute-saone.fr/images/BDP70/Lire_Ecouter_Voir/Coups_de_coeur/2023/2023-01/2023-01-Coup-de-coeur-bibliotheques-DIAPO.jpg);
         background-attachment: fixed;
         background-size: cover;
         backdrop-filter: blur(5px); /* Ajoute un léger flou */
