@@ -147,11 +147,13 @@ def load_data():
 df_items, df_reco = load_data()
 
 
-user_input = st.number_input("Ton User ID :", min_value=0)
+# L'input pour l'ID utilisateur
+user_id = st.number_input("Entrez votre User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
+
 
 if st.button("Voir mes livres"):
     # On appelle la fonction qui vient de l'autre fichier
-    mes_livres = get_user_recos(user_input, df_reco, df_items)
+    mes_livres = afficher_recommandations(user_id, df_reco, df_items)
     
     if mes_livres is not None:
         for index, row in mes_livres.iterrows():

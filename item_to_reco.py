@@ -4,15 +4,9 @@ import pandas as pd
 
 
 
-# Chargement des données
-@st.cache_data
 
-
-
-def afficher_recommandations(df_reco, df_items):
-    # L'input pour l'ID utilisateur
-    user_id = st.number_input("Entrez votre User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
-
+def afficher_recommandations(user_id, df_reco, df_items):
+    
     if st.button("Afficher mes 10 recommandations"):
         # Récupération de la ligne correspondant à l'ID
         row = df_reco[df_reco['user_id'] == user_id]
