@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 import pandas as pd
+import os
 
 
 
@@ -140,10 +141,12 @@ from item_to_reco import afficher_recommandations
 
 @st.cache_data
 def load_data():
-    # Le catalogue complet des livres
-    df_items = pd.read_csv("items.csv") 
-    # Ton Top 10 pré-calculé (issu de ton code Colab)
-    df_reco = pd.read_csv("final_submission-2.csv") 
+    # Chemin absolu basé sur l'emplacement du script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    df_items = pd.read_csv(os.path.join(base_dir, "items.csv"))
+    df_reco  = pd.read_csv(os.path.join(base_dir, "final_submission-2.csv"))
+    
     return df_items, df_reco
 
 df_items, df_reco = load_data()
