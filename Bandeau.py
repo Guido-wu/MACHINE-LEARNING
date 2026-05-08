@@ -5,7 +5,7 @@ def afficher_bandeau_covers(df_items):
     # 1. On récupère les URLs des couvertures (on enlève les lignes vides)
     # On limite à 20 livres pour que ce soit fluide
     covers = df_items[df_items['api_thumbnail'].notna()]['api_thumbnail'].head(20).tolist()
-    
+    covers = [url.replace('&zoom=1', '&zoom=2').replace('http://', 'https://') for url in covers_raw]
     if not covers:
         return # Si aucune image n'est trouvée, on n'affiche rien
 
