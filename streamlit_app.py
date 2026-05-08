@@ -136,7 +136,7 @@ with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
 
 
 
-    ######## RECOMMANDATION ########
+######## RECOMMANDATION ########
 from item_to_reco import afficher_recommandations
 
 @st.cache_data
