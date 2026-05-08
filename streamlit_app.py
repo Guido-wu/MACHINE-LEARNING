@@ -136,7 +136,15 @@ col1, col2 = st.columns(2)
 with col1:
     # On crée le cadre arrondi
     with st.container(border=True):
-        st.markdown("<h3 style='color: #FF4B4B; text-align: center;'>New user - Get a recommendation</h3>", unsafe_allow_html=True)
+        st.markdown(
+        <div style="
+        background-color: rgba(250, 249, 246, 0.85); 
+        padding: 20px; 
+        border-radius: 15px;
+        ">
+        <h3 style='color: #FF4B4B; text-align: center;'>Get a recommendation</h3>", 
+        </div>
+        unsafe_allow_html=True)
         st.write("Find your next favorite book based on your ID.")
         
         # Les widgets sont placés normalement dans le container
