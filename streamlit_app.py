@@ -126,3 +126,35 @@ with col2:
 with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
     st.write("Ici, on mettra les filtres de livres (Genre, Auteur, etc.)")
     choix = st.selectbox("Quel style aimes-tu ?", ["Thriller", "Roman", "SF"])
+
+
+
+
+
+
+
+    ######## RECOMMANDATION ########
+from item_to_reco import afficher_recommandations
+
+@st.cache_data
+def load_data():
+    # Le catalogue complet des livres
+    df_items = pd.read_csv("items.csv") 
+    # Ton Top 10 pré-calculé (issu de ton code Colab)
+    df_reco = pd.read_csv("final_submission-2.csv") 
+    return df_items, df_reco
+
+df_items, df_reco = load_data()
+
+
+user_input = st.number_input("Ton User ID :", min_value=0)
+
+if st.button("Voir mes livres"):
+    # On appelle la fonction qui vient de l'autre fichier
+    mes_livres = get_user_recos(user_input, df_reco, df_items)
+    
+    if mes_livres is not None:
+        for index, row in mes_livres.iterrows():
+            st.write(f"📖 **{row['title']}**")
+    else:
+        st.error("Utilisateur inconnu")
