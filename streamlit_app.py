@@ -115,24 +115,6 @@ def bloc_style(titre, contenu):
 
 col1, col2 = st.columns(2)
 
-with col1:
-    st.markdown(bloc_style(
-        "New user - Get a recommandation", 
-        "Click here to get a personalized book recommendation based on your preferences!"
-        ), 
-        unsafe_allow_html=True)
-
-with col2:
-    st.markdown(bloc_style("Bloc Droite", "Autres données ici"), unsafe_allow_html=True)
-
-
-with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
-    st.write("Ici, on mettra les filtres de livres (Genre, Auteur, etc.)")
-    choix = st.selectbox("Quel style aimes-tu ?", ["Thriller", "Roman", "SF"])
-
-
-
-
 
 
 
@@ -152,16 +134,26 @@ def load_data():
 df_items, df_reco = load_data()
 
 
-# L'input pour l'ID utilisateur
-user_id = st.number_input("Entrez votre User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
+with col1:
+    st.markdown(bloc_style(
+        "New user - Get a recommandation", 
+        
+        
+        # L'input pour l'ID utilisateur
+        user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
 
 
-if st.button("My books recommandations"):
-    # On appelle la fonction qui vient de l'autre fichier
-    Books = afficher_recommandations(user_id, df_reco, df_items)
+        if st.button("My books recommandations"):
+            # On appelle la fonction qui vient de l'autre fichier
+            Books = afficher_recommandations(user_id, df_reco, df_items)
 
-    if Books is not None:
-        for index, row in Books.iterrows():
-            st.write(f"📖 **{row['title']}**")
-    else:
-        st.error("Utilisateur inconnu")
+            if Books is not None:
+                for index, row in Books.iterrows():
+                    st.write(f"📖 **{row['Title']}**")
+        ), 
+            unsafe_allow_html=True)
+
+
+
+with col2:
+    st.markdown(bloc_style("Bloc Droite", "Autres données ici"), unsafe_allow_html=True)
