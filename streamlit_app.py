@@ -138,7 +138,7 @@ with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
 
 ######## RECOMMANDATION ########
 from item_to_reco import afficher_recommandations
-
+st.write(os.listdir(os.path.dirname(os.path.abspath(__file__))))
 @st.cache_data
 def load_data():
     # Chemin absolu basé sur l'emplacement du script
