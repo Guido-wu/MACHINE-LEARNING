@@ -68,6 +68,18 @@ st.markdown(
     """, 
     unsafe_allow_html=True
 )
+@st.cache_data
+def load_enriched_data():
+    return pd.read_csv("items_enriched_api.csv")
+
+df_enriched = load_enriched_data()
+
+# --- APPEL DU BANDEAU DÉFILANT ---
+afficher_bandeau_covers(df_enriched)
+
+st.write("") # Espace
+st.divider()
+
 
 
 
