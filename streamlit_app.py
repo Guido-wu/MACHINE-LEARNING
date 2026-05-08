@@ -138,7 +138,7 @@ with st.expander("👉 Cliquez ici pour ouvrir le moteur de recherche"):
 
 ######## RECOMMANDATION ########
 from item_to_reco import afficher_recommandations
-st.write(os.listdir(os.path.dirname(os.path.abspath(__file__))))
+
 @st.cache_data
 def load_data():
     # Chemin absolu basé sur l'emplacement du script
@@ -159,10 +159,9 @@ user_id = st.number_input("Entrez votre User ID :", min_value=0, max_value=len(d
 if st.button("My books recommandations"):
     # On appelle la fonction qui vient de l'autre fichier
     Books = afficher_recommandations(user_id, df_reco, df_items)
-'''
+
     if Books is not None:
         for index, row in Books.iterrows():
             st.write(f"📖 **{row['title']}**")
     else:
         st.error("Utilisateur inconnu")
-'''

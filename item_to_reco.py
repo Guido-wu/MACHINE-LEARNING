@@ -16,8 +16,8 @@ def afficher_recommandations(user_id, df_reco, df_items):
             for i, book_id in enumerate(reco_ids):
                 book_info = df_items[df_items['i'] == book_id]
                 if not book_info.empty:
-                    title = book_info['title'].values[0]
-                    author = book_info.get('author', book_info.get('Author', 'Auteur inconnu')).values[0]
+                    title = book_info['Title'].values[0]
+                    author = book_info.get('Author', book_info.get('Author', 'Unknown Author')).values[0]
                     st.write(f"**{i+1}. {title}**")
                     st.caption(f"✍️ {author}")
                     st.write("---")
