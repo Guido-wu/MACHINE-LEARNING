@@ -11,7 +11,7 @@ def afficher_bandeau_covers(df_items):
 
     # 2. Construction du HTML pour le défilement
     # On double la liste pour créer un effet de boucle infinie sans coupure
-    img_tags = "".join([f'<img src="{url}" style="height:200px; margin: 0 10px; border-radius:10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">' for url in covers + covers])
+    img_tags = "".join([f'<img src="{url}" style="height:400px; margin: 0 10px; border-radius:10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">' for url in covers + covers])
 
     scroll_html = f"""
     <div style="overflow: hidden; white-space: nowrap; width: 100%; background: rgba(255,255,255,0.1); padding: 10px 0;">
