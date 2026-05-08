@@ -115,9 +115,6 @@ def bloc_style(titre, contenu):
 
 col1, col2 = st.columns(2)
 
-
-
-
 ######## RECOMMANDATION ########
 from item_to_reco import afficher_recommandations
 
@@ -134,26 +131,26 @@ def load_data():
 df_items, df_reco = load_data()
 
 
-with col1:
-    st.markdown(bloc_style(
-        "New user - Get a recommandation", 
-        
-        
-        # L'input pour l'ID utilisateur
-        user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
+col1, col2 = st.columns(2)
 
+with col1:
+    # On crée le cadre arrondi
+    with st.container(border=True):
+        st.markdown("<h3 style='color: #FF4B4B; text-align: center;'>New user - Get a recommendation</h3>", unsafe_allow_html=True)
+        st.write("Find your next favorite book based on your ID.")
+        
+        # Les widgets sont placés normalement dans le container
+        user_id = st.number_input("Enter User ID :", 
+                                 min_value=0, 
+                                 max_value=len(df_reco)-1, 
+                                 step=1, 
+                                 key="user_reco")
 
         if st.button("My books recommandations"):
-            # On appelle la fonction qui vient de l'autre fichier
-            Books = afficher_recommandations(user_id, df_reco, df_items)
-
-            if Books is not None:
-                for index, row in Books.iterrows():
-                    st.write(f"📖 **{row['Title']}**")
-        ), 
-            unsafe_allow_html=True)
-
-
+            # Appelle ta fonction (assure-toi qu'elle fait les st.write à l'intérieur)
+            afficher_recommandations(user_id, df_reco, df_items)
 
 with col2:
-    st.markdown(bloc_style("Bloc Droite", "Autres données ici"), unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown("<h3 style='color: #FF4B4B; text-align: center;'>Bloc Droite</h3>", unsafe_allow_html=True)
+        st.write("Autres données ici")
