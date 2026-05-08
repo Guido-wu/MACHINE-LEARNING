@@ -1,43 +1,43 @@
 import streamlit as st
 import pandas as pd
+import base64
 
+# --- 1. DÉFINITION DE LA FONCTION (Tout en haut !) ---
 def afficher_bandeau_covers(df_items):
-    # 1. On filtre drastiquement : pas de NaN et on s'assure que c'est du texte
-    # On en prend 50 au départ pour être sûr d'en avoir au moins 20 valides à l'arrivée
-    potential_covers = df_items[df_items['api_thumbnail'].notna()]['api_thumbnail'].head(50).tolist()
-    
-    covers = []
-    for url in potential_covers:
-        if isinstance(url, str) and len(url) > 10: # On vérifie que l'URL a une longueur crédible
-            # Boost de résolution
-            clean_url = url.replace('&zoom=1', '&zoom=2').replace('http://', 'https://')
-            covers.append(clean_url)
-    
-    # On ne garde que les 20 premières valides pour la fluidité
-    final_covers = covers[:20]
-
-    if not final_covers:
+    # On prend les thumbnails non vides
+    covers = df_items[df_items['api_thumbnail'].notna()]['api_thumbnail'].head(20).tolist()
+    if not covers:
         return 
-
-    # 2. Construction du HTML
-    # On n'affiche QUE les images qui ont réussi le filtre
-    img_tags = "".join([
-        f'<img src="{u}" style="height:400px; width:280px; object-fit:cover; margin: 0 15px; border-radius:15px; box-shadow: 0px 10px 20px rgba(0,0,0,0.3);">' 
-        for u in final_covers + final_covers
-    ])
-
+    
+    img_tags = "".join([f'<img src="{url}" style="height:200px; margin: 0 10px; border-radius:10px;">' for url in covers + covers])
+    
     scroll_html = f"""
-    <div style="overflow: hidden; white-space: nowrap; width: 100%; height: 450px; display: flex; align-items: center;">
-        <div style="display: inline-block; animation: scroll 60s linear infinite;">
+    <div style="overflow: hidden; white-space: nowrap; width: 100%;">
+        <div style="display: inline-block; animation: scroll 40s linear infinite;">
             {img_tags}
         </div>
     </div>
     <style>
-    @keyframes scroll {{
-        0% {{ transform: translateX(0); }}
-        100% {{ transform: translateX(-50%); }}
-    }}
+    @keyframes scroll {{ 0% {{ transform: translateX(0); }} 100% {{ transform: translateX(-50%); }} }}
     </style>
     """
-    
     st.markdown(scroll_html, unsafe_allow_html=True)
+
+# --- 2. CHARGEMENT DES DONNÉES ---
+@st.cache_data
+def load_data():
+    df_items = pd.read_csv("items.csv")
+    df_reco = pd.read_csv("final_submission-2.csv")
+    df_enriched = pd.read_csv("items_enriched_api.csv") # Ton nouveau fichier
+    return df_items, df_reco, df_enriched
+
+df_items, df_reco, df_enriched = load_data()
+
+# --- 3. EXÉCUTION ---
+# Titre...
+st.title("Welcome to Omega Books")
+
+# Maintenant l'appel à la ligne 78 fonctionnera car la fonction est définie plus haut !
+afficher_bandeau_covers(df_enriched) 
+
+# ... reste du code ...
