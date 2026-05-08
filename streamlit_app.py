@@ -2,7 +2,8 @@ import streamlit as st
 import base64
 import pandas as pd
 import os
-
+from item_to_reco import afficher_recommandations
+from Bandeau import afficher_bandeau_covers
 
 
 
@@ -128,7 +129,7 @@ def bloc_style(titre, contenu):
 col1, col2 = st.columns(2)
 
 ######## RECOMMANDATION ########
-from item_to_reco import afficher_recommandations
+
 
 @st.cache_data
 def load_data():
