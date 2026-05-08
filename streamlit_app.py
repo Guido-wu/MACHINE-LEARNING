@@ -134,28 +134,35 @@ df_items, df_reco = load_data()
 col1, col2 = st.columns(2)
 
 with col1:
-    # On crée le cadre arrondi
+    # On utilise le container pour créer le cadre global
     with st.container(border=True):
+        # On injecte le style uniquement pour le titre ou le fond si tu veux
         st.markdown(
-        <div style="
-        background-color: rgba(250, 249, 246, 0.85); 
-        padding: 20px; 
-        border-radius: 15px;
-        ">
-        <h3 style='color: #FF4B4B; text-align: center;'>Get a recommendation</h3>", 
-        </div>
-        unsafe_allow_html=True)
+            """
+            <div style="
+                background-color: rgba(250, 249, 246, 0.85); 
+                padding: 10px; 
+                border-radius: 10px;
+                margin-bottom: 10px;
+            ">
+                <h3 style='color: #FF4B4B; text-align: center; margin: 0;'>Get a recommendation</h3>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+        
         st.write("Find your next favorite book based on your ID.")
         
-        # Les widgets sont placés normalement dans le container
-        user_id = st.number_input("Enter User ID :", 
-                                 min_value=0, 
-                                 max_value=len(df_reco)-1, 
-                                 step=1, 
-                                 key="user_reco")
+        # Les widgets Streamlit (ils doivent être HORS du st.markdown)
+        user_id = st.number_input(
+            "Enter User ID :", 
+            min_value=0, 
+            max_value=len(df_reco)-1, 
+            step=1, 
+            key="user_reco"
+        )
 
         if st.button("My books recommandations"):
-            # Appelle ta fonction (assure-toi qu'elle fait les st.write à l'intérieur)
             afficher_recommandations(user_id, df_reco, df_items)
 
 with col2:
