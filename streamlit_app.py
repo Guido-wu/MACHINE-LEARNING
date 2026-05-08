@@ -86,7 +86,7 @@ st.divider()
 
 
 # ajout d'une flèche rebond pour notre bouton de scroll
-for _ in range(20):
+for _ in range(2):
     st.write("")
 
 st.markdown(

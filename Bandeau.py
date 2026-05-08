@@ -2,30 +2,28 @@ import streamlit as st
 import pandas as pd
 
 def afficher_bandeau_covers(df_items):
-    # 1. On récupère les URLs et on s'assure qu'elles ne sont pas vides
-    covers_raw = df_items[df_items['api_thumbnail'].notna()]['api_thumbnail'].head(30).tolist()
+    # 1. On filtre drastiquement : pas de NaN et on s'assure que c'est du texte
+    # On en prend 50 au départ pour être sûr d'en avoir au moins 20 valides à l'arrivée
+    potential_covers = df_items[df_items['api_thumbnail'].notna()]['api_thumbnail'].head(50).tolist()
     
-    if not covers_raw:
+    covers = []
+    for url in potential_covers:
+        if isinstance(url, str) and len(url) > 10: # On vérifie que l'URL a une longueur crédible
+            # Boost de résolution
+            clean_url = url.replace('&zoom=1', '&zoom=2').replace('http://', 'https://')
+            covers.append(clean_url)
+    
+    # On ne garde que les 20 premières valides pour la fluidité
+    final_covers = covers[:20]
+
+    if not final_covers:
         return 
 
-    # Image de remplacement si la cover est cassée (un beau livre générique)
-    placeholder = "https://images.unsplash.com/photo-1543004218-ee141104975a?q=80&w=280&h=400&auto=format&fit=crop"
-
-    covers = []
-    for url in covers_raw:
-        if isinstance(url, str) and url.strip() != "":
-            # On boost la résolution
-            new_url = url.replace('&zoom=1', '&zoom=2').replace('http://', 'https://')
-            covers.append(new_url)
-
     # 2. Construction du HTML
-    # L'astuce ici : onerror="this.src='{placeholder}'" 
-    # Si l'image ne charge pas, le navigateur la remplace par le placeholder
+    # On n'affiche QUE les images qui ont réussi le filtre
     img_tags = "".join([
-        f'<img src="{url}" onerror="this.onerror=null;this.src=\'{placeholder}\';" '
-        f'style="height:400px; width:280px; object-fit:cover; margin: 0 15px; '
-        f'border-radius:15px; box-shadow: 0px 10px 20px rgba(0,0,0,0.3);">' 
-        for url in covers + covers
+        f'<img src="{u}" style="height:400px; width:280px; object-fit:cover; margin: 0 15px; border-radius:15px; box-shadow: 0px 10px 20px rgba(0,0,0,0.3);">' 
+        for u in final_covers + final_covers
     ])
 
     scroll_html = f"""
