@@ -127,7 +127,7 @@ with st.sidebar:
     menu = st.radio(
         "Navigation",
         ["🏠 Home", "📚 My Library", "✨ Recommendations", "📊 Statistics"],
-        index=0
+        index=0,
         label_visibility="collapsed"
     )
     st.markdown("---")
