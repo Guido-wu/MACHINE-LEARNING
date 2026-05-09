@@ -21,6 +21,13 @@ st.markdown(f"""
     /* Fond principal en Beige */
     .stApp {{
         background-color: #fff8e8;
+        background-image: 
+        linear-gradient(rgba(255, 248, 232, 0.75), rgba(255, 248, 232, 0.75)),
+        url("data:image/png;base64,{get_base64_of_bin_file('Logo_2.png')}");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 600px;
+    background-attachment: fixed;
     }}
 
     /* Sidebar en Vert  */
@@ -191,10 +198,10 @@ if menu == "Home":
 if menu == "Home":
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
-    st.image("Logo_1.png", width=250) 
+
+
     st.divider()
     col1, col2 = st.columns([1,1.5])
-
 
     with col1:
         st.markdown("""
