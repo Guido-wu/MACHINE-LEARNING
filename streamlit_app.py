@@ -144,7 +144,10 @@ st.markdown(f"""
     </style>
     """, unsafe_allow_html=True)
 
-# 3. CHARGEMENT DES DONNÉES
+
+
+# 3. CHARGEMENT DES DONNÉES et image de fond
+
 @st.cache_data
 def load_data():
     df_items = pd.read_csv("items.csv")
@@ -153,6 +156,12 @@ def load_data():
     return df_items, df_reco, df_enriched
 
 df_items, df_reco, df_enriched = load_data()
+
+import base64
+def get_base64(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
 
 
@@ -182,12 +191,6 @@ with st.sidebar:
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "Home":
     
-    import base64
-    def get_base64(bin_file):
-        with open(bin_file, 'rb') as f:
-            data = f.read()
-        return base64.b64encode(data).decode()
-
     #Backgroud logo
     try:
         bin_str = get_base64("Logo_2.png") 
