@@ -89,7 +89,7 @@ df_items, df_reco, df_enriched = load_data()
 
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center; font-size: 40px; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; font-size: 60px; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
     
     # 2. Le Logo et la phrase côte à côte
     col_logo, col_text = st.columns([1, 2]) # Ajustez les chiffres [1, 2] pour la largeur relative
