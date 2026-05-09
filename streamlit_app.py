@@ -192,10 +192,6 @@ with st.sidebar:
     
 
 
-if menu == "Home":
-    afficher_image_fond("Logo_2.png")
-
-
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 
 if menu == "Home":
@@ -224,14 +220,40 @@ if menu == "Home":
             </div>
         """, unsafe_allow_html=True)
 
+    st.divider()
+    col1, col2 = st.columns([2,1])
+
+    with col1:
+        st.markdown("""
+            <div class="book-card">
+                <h3 style="color: #1f6f43;">Top Books</h3>
+                <p>See our best ranked books</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+       
+
+    with col2:
+        st.markdown("""
+            <div class="book-card">
+                <h3 style="color: #1f6f43;">New Releases</h3>
+                <p>Discover the latest books</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        
+
+
     # Ton bandeau défilant (Resolution Boosted)
     afficher_bandeau_covers(df_enriched)
 
 
-elif menu == "My Library":
-    
-    st.title("My Library")
-    st.dataframe(df_items.head(50)) # Exemple d'affichage
+
+
+
+
+
+
 
 
 elif menu == "Recommendations":
@@ -239,6 +261,14 @@ elif menu == "Recommendations":
     user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
     if st.button("Get Recommendations"):
         afficher_recommandations(user_id, df_reco, df_items)
+
+
+
+elif menu == "My Library":
+    
+    st.title("My Library")
+    st.dataframe(df_items.head(50)) # Exemple d'affichage
+
 
 
 elif menu == "Statistics":
