@@ -156,8 +156,9 @@ def load_data():
     return df_items, df_reco, df_enriched
 
 df_items, df_reco, df_enriched = load_data()
-if menu == "Home":
-    afficher_image_fond("Logo_2.png")
+
+
+    
 
 
 
@@ -180,7 +181,7 @@ with st.sidebar:
     st.markdown("---")
     
 
-
+afficher_image_fond("Logo_2.png")
 
 
 
