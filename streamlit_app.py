@@ -6,6 +6,9 @@ from item_to_reco import afficher_recommandations
 from Bandeau import afficher_bandeau_covers
 from Photo_Fond import afficher_image_fond, get_base64_of_bin_file
 from Quote import afficher_quote_of_the_day
+from top_books import afficher_top_books, afficher_new_releases
+
+
 
 # 1. CONFIGURATION DE LA PAGE
 st.set_page_config(
@@ -164,11 +167,10 @@ def load_data():
     df_reco = pd.read_csv("final_submission-2.csv")
     df_enriched = pd.read_csv("items_enriched_api.csv")
     df_quotes = pd.read_csv("quotes.csv")
-    return df_items, df_reco, df_enriched, df_quotes
+    df_interactions = pd.read_csv("interactions_train.csv")
+    return df_items, df_reco, df_enriched, df_quotes, df_interactions
 
-df_items, df_reco, df_enriched, df_quotes = load_data()
-
-
+df_items, df_reco, df_enriched, df_quotes, df_interactions = load_data()
 
 
 
@@ -203,22 +205,15 @@ if menu == "Home":
     col1, col2 = st.columns([1,1.5])
 
     with col1:
-        st.markdown("""
-            <div class="book-card">
-                <h3 style="color: #1f6f43;">Top Books</h3>
-                <p>See our best ranked books</p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-       
+        st.markdown("""<div class="book-card"><h3 style="color:#1f6f43;">🏆 Top Books</h3></div>""", unsafe_allow_html=True)
+        afficher_top_books(df_enriched, df_interactions)
 
     with col2:
-        st.markdown("""
-            <div class="book-card">
-                <h3 style="color: #1f6f43;">New Releases</h3>
-                <p>Discover the latest books</p>
-            </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div class="book-card"><h3 style="color:#1f6f43;">✨ New Releases</h3></div>""", unsafe_allow_html=True)
+        afficher_new_releases(df_enriched)
+
+
+
 
     st.divider()
     col1, col2 = st.columns([2,1])
