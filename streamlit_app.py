@@ -195,8 +195,7 @@ if menu == "Home":
             f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',
             unsafe_allow_html=True
         )
-    except:
-        pass
+    
 
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
@@ -222,7 +221,6 @@ if menu == "Home":
                 <p>Discover the latest books</p>
             </div>
         """, unsafe_allow_html=True)
-        st.progress(0.48)
 
     # Ton bandeau défilant (Resolution Boosted)
     afficher_bandeau_covers(df_enriched)
