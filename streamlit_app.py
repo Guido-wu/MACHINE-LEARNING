@@ -20,12 +20,12 @@ st.markdown(f"""
     <style>
     /* Fond principal en Beige */
     .stApp {{
-        background-color: #FDF8F1;
+        background-color: #fff8e8;
     }}
 
     /* Sidebar en Vert Forêt */
     [data-testid="stSidebar"] {{
-        background-color: #2D4F35;
+        background-color: #1f6f43;
     }}
     
     /* Texte de la sidebar en blanc */
@@ -35,7 +35,7 @@ st.markdown(f"""
 
     /* Boutons et éléments interactifs */
     .stButton>button {{
-        background-color: #2D4F35;
+        background-color: #1f6f43;
         color: white;
         border-radius: 20px;
         border: none;
@@ -88,7 +88,7 @@ if menu == "🏠 Home":
     with col1:
         st.markdown("""
             <div class="book-card">
-                <h3 style="color: #2D4F35;">New user - Recommandation</h3>
+                <h3 style="color: #1f6f43;">New user - Recommandation</h3>
                 <p>Find your next favorite book based on your reading history.</p>
             </div>
         """, unsafe_allow_html=True)
@@ -100,7 +100,7 @@ if menu == "🏠 Home":
     with col2:
         st.markdown("""
             <div class="book-card">
-                <h3 style="color: #2D4F35;">Reading Goals 2025</h3>
+                <h3 style="color: #1f6f43;">Reading Goals 2025</h3>
                 <p>You have read <b>24</b> books out of 50.</p>
             </div>
         """, unsafe_allow_html=True)
