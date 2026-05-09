@@ -89,10 +89,25 @@ df_items, df_reco, df_enriched = load_data()
 
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center; font-size: 60px; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
-    
+
+    st.markdown("""
+        <div style='text-align: center; padding-bottom: 20px;'>
+            <p style='
+                font-family: "Playfair Display", serif !important;
+                font-size: 55px !important; 
+                font-weight: 800 !important; 
+                color: #FFFFFF !important;
+                line-height: 1 !important;
+                margin: 0 !important;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'>
+                The Bookworm
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+
+
     # 2. Le Logo et la phrase côte à côte
-    col_logo, col_text = st.columns([1, 2]) # Ajustez les chiffres [1, 2] pour la largeur relative
+    col_logo, col_text = st.columns([1, 2.5]) # Ajustez les chiffres [1, 2] pour la largeur relative
     
     with col_logo:
         # On utilise le nom de fichier corrigé suite à l'erreur précédente
