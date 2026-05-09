@@ -187,7 +187,7 @@ with st.sidebar:
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 
 if menu == "Home":
-    afficher_image_fond("Logo_2.png")
+    
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
     
