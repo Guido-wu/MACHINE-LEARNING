@@ -234,7 +234,7 @@ if menu == "Home":
        
 
     with col2:
-        st.image("Logo_1.png", width=250) 
+        st.image("Logo_3.png", width=250) 
 
 
 
