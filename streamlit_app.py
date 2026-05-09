@@ -195,8 +195,7 @@ if menu == "Home":
             f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',
             unsafe_allow_html=True
         )
-    except:
-        pass
+    
 
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
