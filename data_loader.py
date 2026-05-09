@@ -7,7 +7,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / "data"
+DATA_DIR = ROOT
 ITEMS_PATH = DATA_DIR / "items_enriched_api.csv"
 RECOMMENDATIONS_PATH = DATA_DIR / "final_submission-2.csv"
 
