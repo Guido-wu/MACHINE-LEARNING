@@ -152,7 +152,7 @@ with st.sidebar:
 
     menu = st.radio(
         "Navigation",
-        ["🏠 Home", "📚 My Library", "✨ Recommendations", "📊 Statistics"],
+        ["Home", "My Library", "Recommendations", "Statistics"],
         index=0,
         label_visibility="collapsed"
     )
@@ -171,7 +171,7 @@ with st.sidebar:
 
 
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
-if menu == "🏠 Home":
+if menu == "Home":
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
     
@@ -202,11 +202,11 @@ if menu == "🏠 Home":
         """, unsafe_allow_html=True)
         st.progress(0.48)
 
-elif menu == "📚 My Library":
+elif menu == "My Library":
     st.title("My Library")
     st.dataframe(df_items.head(50)) # Exemple d'affichage
 
-elif menu == "📊 Statistics":
+elif menu == "Statistics":
     st.title("Reading Insights")
     # Petit graph simple pour le look
     chart_data = pd.DataFrame([10, 15, 30, 20, 5, 25], index=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'])
