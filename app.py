@@ -5,14 +5,14 @@ import random
 import pandas as pd
 import streamlit as st
 
-from data_loader import (
+from src.data_loader import (
     genre_options,
     load_books,
     load_recommendations,
     recommendations_for_user,
     search_books,
 )
-from ui import (
+from src.ui import (
     book_grid,
     card_end,
     card_start,

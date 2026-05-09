@@ -6,16 +6,6 @@ from typing import Iterable
 import pandas as pd
 import streamlit as st
 
-def get_image_base64(path):
-    try:
-        with open(path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode()
-    except Exception:
-        return "" # Si l'image n'est pas trouvée, on ne crash pas
-
-
-
-
 
 COLORS = {
     "cream": "#fff8e8",
@@ -326,35 +316,17 @@ def page_css() -> None:
 
 
 def sidebar(active: str) -> str:
-    # 1. On définit le logo
-    logo_path = "a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png" 
-    img_base64 = get_image_base64(logo_path) 
-
-    
     st.sidebar.markdown(
-        f"""
-        <style>
-            /* Ton code pour cacher le point rouge */
-            [data-testid="stSidebar"] div[role="radiogroup"] > label > div:first-child {{
-                display: none !important;
-            }}
-            /* Ton code pour le décalage du texte */
-            [data-testid="stSidebar"] div[role="radiogroup"] label {{
-                padding-left: 15px !important;
-            }}
-        </style>
-
+        """
         <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
-          <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-            <img src="data:image/png;base64,{img_base64}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-          </div>
-          <div class="serif" style="font-size:2rem;font-weight:700;line-height:1.05; color:#fff6d6;">The<br>Bookworm</div>
-          <div style="margin-top:.8rem;font-size:.95rem;color:#fffbc">Dive into stories.<br>Grow your world.</div>
+          <div style="font-size:4.4rem;line-height:1">🐛</div>
+          <div class="serif" style="font-size:2rem;font-weight:700;line-height:1.05">The<br>Bookworm</div>
+          <div style="margin-top:.8rem;font-size:.95rem;color:#fff0bc">Dive into stories.<br>Grow your world.</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-  pages = [
+    pages = [
         "Home",
         "My Library",
         "Recommendations",
@@ -365,8 +337,8 @@ def sidebar(active: str) -> str:
         "Challenges",
         "Bookmarks",
     ]
-  choice = st.sidebar.radio("Navigation", pages, index=pages.index(active), label_visibility="collapsed")
-  st.sidebar.markdown(
+    choice = st.sidebar.radio("Navigation", pages, index=pages.index(active), label_visibility="collapsed")
+    st.sidebar.markdown(
         """
         <div style="height:14rem"></div>
         <div style="padding:1rem;text-align:center">
@@ -376,7 +348,7 @@ def sidebar(active: str) -> str:
         """,
         unsafe_allow_html=True,
     )
-  return choice
+    return choice
 
 
 def header(title: str, subtitle: str, search_label: str = "Search for books, authors, genres...") -> str:
