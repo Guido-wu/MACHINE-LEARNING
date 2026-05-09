@@ -57,40 +57,52 @@ st.markdown(f"""
     }}
 
     <style>
-    /* 1. On cache les petits ronds (radio buttons) */
-    [data-testid="stSidebarNavLink"] div:has(input) {{
+
+    /* Creation des boutons sidebar */
+
+
+    div[data-testid="stMarkdownContainer"] + div[role="radiogroup"] > div {{
+        background: transparent !important;
+    }}
+    
+    /* Cache l'input radio physique */
+    input[type="radio"] {{
+        display: none !important;
+    }}
+
+    /* Cache le cercle blanc/rouge de Streamlit */
+    div[data-testid="stWidgetLabel"] + div div[data-bv-test="radio-button"] {{
         display: none !important;
     }}
     
-    /* 2. On transforme chaque option du menu en gros bouton élégant */
-    [data-testid="stSidebarNav"] li {{
-        background-color: transparent;
-        border-radius: 15px;
-        margin-bottom: 5px;
-        transition: all 0.3s ease;
-    }}  
-
-    /* 3. Effet quand on passe la souris dessus (Hover) */
-    [data-testid="stSidebarNav"] li:hover {{
-        background-color: rgba(255, 255, 255, 0.1); /* Couleur plus claire au survol */
-        transform: translateX(5px); /* Petit mouvement vers la droite */
-    }}
-
-    /* 4. Style de l'option sélectionnée (comme sur votre image d'inspi) */
-    [data-testid="stSidebarNav"] li:has(a[aria-current="page"]) {{
-        background-color: #3e8e5d !important; /* Vert plus clair pour l'actif */
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }}
-
-    /* 5. On ajuste le texte à l'intérieur */
-    [data-testid="stSidebarNav"] a {{
-        color: white !important;
-        font-family: 'Lora', serif !important;
-        font-size: 1.1rem !important;
-        text-decoration: none !important;
+    /* 2. CRÉATION DU BOUTON SOBRE */
+    div[role="radiogroup"] label {{
+        background-color: transparent !important;
+        border-radius: 10px !important;
         padding: 10px 15px !important;
+        margin-bottom: 5px !important;
+        width: 100% !important;
+        transition: background-color 0.3s ease !important;
+        cursor: pointer !important;
+        border: none !important;
+    }}
+
+    /* 3. EFFET AU SURVOL (HOVER) */
+    div[role="radiogroup"] label:hover {{
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }}
+
+    /* 4. STYLE DE L'OPTION SÉLECTIONNÉE */
+    div[role="radiogroup"] label[data-baseweb="radio"] div:first-child {{
+         background-color: rgba(255, 255, 255, 0.2) !important;
+         border-radius: 10px !important;
     }}
     
+    /* On force la couleur du texte en blanc */
+    div[role="radiogroup"] p {{
+        color: white !important;
+        font-size: 1.1rem !important;
+    }}
 
     /* Style des cartes blanches */
     .book-card {{
@@ -113,16 +125,13 @@ def load_data():
 
 df_items, df_reco, df_enriched = load_data()
 
+
+
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
     st.markdown("<h1 style='text-align: center; font-size: 3rem; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
 
-    st.image("Logo_1.png", width=250) 
-
-    st.markdown("<p style='font-style: italic; margin-top: 10px;'>Dive into stories. Grow your world</p>", unsafe_allow_html=True)
-    st.markdown("---")
-
-    st.markdown("<p style='color:white; font-weight:bold; opacity:0.8;'>NAVIGATION</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color:white; font-weight:bold; opacity:0.8;'>MENU</p>", unsafe_allow_html=True)
 
     menu = st.radio(
         "Navigation",
@@ -130,6 +139,10 @@ with st.sidebar:
         index=0,
         label_visibility="collapsed"
     )
+
+    st.image("Logo_1.png", width=250) 
+
+    st.markdown("<p style='font-style: italic; margin-top: 10px;'>Dive into stories. Grow your world</p>", unsafe_allow_html=True)
     st.markdown("---")
     
 
