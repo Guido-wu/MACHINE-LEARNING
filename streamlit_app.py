@@ -89,7 +89,7 @@ df_items, df_reco, df_enriched = load_data()
 
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
-    st.h2("The Bookworm")
+    st.markdown("The Bookworm")
     st.image("a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png")
     
     st.markdown("---")
