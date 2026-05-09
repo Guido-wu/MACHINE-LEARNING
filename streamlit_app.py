@@ -28,10 +28,34 @@ st.markdown(f"""
         background-color: #f5a623;
     }}
     
+    /* 1. On importe la police depuis Google */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital@0;1&display=swap');
+
     /* Texte de la sidebar en blanc */
     [data-testid="stSidebar"] .stMarkdown p, [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2 {{
         color: #FFFFFF !important;
     }}
+
+
+    /* 2. On l'applique à la Sidebar */
+    [data-testid="stSidebar"] .stMarkdown p, 
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] label {{ 
+        color: #FFFFFF !important;
+        font-family: 'Playfair Display', serif !important; /* La police Fancy */
+        font-size: 1.1rem !important;
+    }}
+    
+    /* 3. Style pour l'image du logo */
+    .logo-img {{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 120px; /* Ajuste la taille ici */
+        margin-bottom: 20px;
+    }}
+
 
     /* Boutons et éléments interactifs */
     .stButton>button {{
@@ -65,7 +89,9 @@ df_items, df_reco, df_enriched = load_data()
 
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
-    st.markdown("# 📖 The Bookworm")
+    st.markdown("The Bookworm")
+    st.image("a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png")
+    
     st.markdown("---")
     menu = st.radio(
         "Navigation",
