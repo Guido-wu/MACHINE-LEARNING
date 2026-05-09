@@ -8,8 +8,8 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT
-ITEMS_PATH = DATA_DIR / "items_enriched_api.csv"
-RECOMMENDATIONS_PATH = DATA_DIR / "final_submission-2.csv"
+ITEMS_PATH = DATA_DIR /MACHINE LEARNING/ "items_enriched_api.csv"
+RECOMMENDATIONS_PATH = DATA_DIR /MACHINE LEARNING/ "final_submission-2.csv"
 
 
 def _clean_text(value: object, fallback: str = "") -> str:
