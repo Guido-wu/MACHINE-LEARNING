@@ -156,7 +156,8 @@ def load_data():
     return df_items, df_reco, df_enriched
 
 df_items, df_reco, df_enriched = load_data()
-
+if menu == "Home":
+    afficher_image_fond("Logo_2.png")
 
 
 
@@ -187,6 +188,7 @@ with st.sidebar:
 
 if menu == "Home":
     afficher_image_fond("Logo_2.png")
+
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
     
     st.divider()
