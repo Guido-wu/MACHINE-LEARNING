@@ -64,12 +64,24 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
 
+
+    /* Configuration de l'image de fond en haut à droite */
+    .background-logo {{
+        position: fixed;
+        top: 20px;       /* Distance du haut */
+        right: 20px;     /* Distance de la droite */
+        width: 300px;    /* Taille de l'image */
+        opacity: 0.1;    /* Transparence (0.1 = très transparent, 1.0 = opaque) */
+        z-index: -1;     /* Place l'image DERRIÈRE le texte */
+        pointer-events: none; /* Permet de cliquer sur les boutons à travers l'image */
+    }}
     <style>
+
+
+
 
     /* Creation des boutons sidebar */
     
-
-
 
 
 
@@ -167,31 +179,35 @@ with st.sidebar:
 
 
 
-
-
-
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "Home":
 
+    #Backgroud logo
+    try:
+        bin_str = get_base64("Logo_2.png") 
+        st.markdown(
+            f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',
+            unsafe_allow_html=True
+        )
+    except:
+        pass
+
+
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
     
-    # Ton bandeau défilant (Resolution Boosted)
-    afficher_bandeau_covers(df_enriched)
-    
     st.divider()
-    
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1,1.5])
+
+
     with col1:
         st.markdown("""
             <div class="book-card">
-                <h3 style="color: #1f6f43;">New user - Recommandation</h3>
-                <p>Find your next favorite book based on your reading history.</p>
+                <h3 style="color: #1f6f43;">Top Books</h3>
+                <p>See our best ranked books</p>
             </div>
         """, unsafe_allow_html=True)
         
-        user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
-        if st.button("Get Recommendations"):
-            afficher_recommandations(user_id, df_reco, df_items)
+       
 
     with col2:
         st.markdown("""
@@ -202,9 +218,22 @@ if menu == "Home":
         """, unsafe_allow_html=True)
         st.progress(0.48)
 
+    # Ton bandeau défilant (Resolution Boosted)
+    afficher_bandeau_covers(df_enriched)
+
+
 elif menu == "My Library":
     st.title("My Library")
     st.dataframe(df_items.head(50)) # Exemple d'affichage
+
+
+elif menu == "Recommendations":
+
+
+     user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
+        if st.button("Get Recommendations"):
+            afficher_recommandations(user_id, df_reco, df_items)
+
 
 elif menu == "Statistics":
     st.title("Reading Insights")
