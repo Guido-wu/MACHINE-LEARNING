@@ -101,7 +101,14 @@ with st.sidebar:
     st.markdown("---")
     st.write("Welcome back, Reader!")
 
-# 5. CONTENU PRINCIPAL
+
+
+
+
+
+
+
+# 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "🏠 Home":
     st.markdown("<h1 style='color: #1a1a1a;'>Your Digital Sanctuary</h1>", unsafe_allow_html=True)
     
