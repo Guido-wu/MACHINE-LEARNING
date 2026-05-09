@@ -165,11 +165,11 @@ def get_base64(bin_file):
 
 #Backgroud logo
 try:
-      bin_str = get_base64("Logo_2.png") 
+    bin_str = get_base64("Logo_2.png") 
     st.markdown(
         f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',            
         unsafe_allow_html=True
-        )
+    )
  except:
     pass
 
