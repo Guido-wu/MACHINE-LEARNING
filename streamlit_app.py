@@ -90,7 +90,7 @@ df_items, df_reco, df_enriched = load_data()
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
     st.markdown("The Bookworm")
-    st.image("Logo1.png")
+    st.image("Logo_1.png")
     
     st.markdown("---")
     menu = st.radio(
