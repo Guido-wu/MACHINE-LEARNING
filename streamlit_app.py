@@ -170,7 +170,7 @@ try:
         f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',            
         unsafe_allow_html=True
     )
- except:
+except:
     pass
 
 
