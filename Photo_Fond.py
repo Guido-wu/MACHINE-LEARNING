@@ -1,3 +1,8 @@
+import streamlit as st  # <--- IL MANQUE CETTE LIGNE
+import base64
+import os
+
+
 def afficher_image_fond(nom_fichier):
     import base64
     import os
