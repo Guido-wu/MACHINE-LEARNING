@@ -229,10 +229,9 @@ elif menu == "My Library":
 
 elif menu == "Recommendations":
 
-
-     user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
-        if st.button("Get Recommendations"):
-            afficher_recommandations(user_id, df_reco, df_items)
+    user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
+    if st.button("Get Recommendations"):
+        afficher_recommandations(user_id, df_reco, df_items)
 
 
 elif menu == "Statistics":
