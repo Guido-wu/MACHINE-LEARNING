@@ -225,8 +225,8 @@ if menu == "Home":
 
     with col1:
         st.markdown("""
-            <div class="Quote of the Day">
-                <h3 style="color: #1f6f43;">Top Books</h3>
+            <div class="book-card">
+                <h3 style="color: #1f6f43;">Quote of the Day</h3>
                 <p>"A room without books is like a body without a soul." - Marcus Tullius Cicero</p>
             </div>
         """, unsafe_allow_html=True)
