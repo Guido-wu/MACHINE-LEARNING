@@ -181,6 +181,12 @@ with st.sidebar:
 
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "Home":
+    
+    import base64
+        def get_base64(bin_file):
+            with open(bin_file, 'rb') as f:
+                data = f.read()
+            return base64.b64encode(data).decode()
 
     #Backgroud logo
     try:
@@ -212,8 +218,8 @@ if menu == "Home":
     with col2:
         st.markdown("""
             <div class="book-card">
-                <h3 style="color: #1f6f43;">Reading Goals 2025</h3>
-                <p>You have read <b>24</b> books out of 50.</p>
+                <h3 style="color: #1f6f43;">New Releases</h3>
+                <p>Discover the latest books</p>
             </div>
         """, unsafe_allow_html=True)
         st.progress(0.48)
