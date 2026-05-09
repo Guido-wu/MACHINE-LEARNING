@@ -191,7 +191,7 @@ if menu == "Home":
 if menu == "Home":
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
-    
+    st.image("Logo_1.png", width=250) 
     st.divider()
     col1, col2 = st.columns([1,1.5])
 
@@ -219,20 +219,20 @@ if menu == "Home":
 
 
 elif menu == "My Library":
-    afficher_image_fond("Logo_2.png")
+    
     st.title("My Library")
     st.dataframe(df_items.head(50)) # Exemple d'affichage
 
 
 elif menu == "Recommendations":
-    afficher_image_fond("Logo_2.png")   
+      
     user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
     if st.button("Get Recommendations"):
         afficher_recommandations(user_id, df_reco, df_items)
 
 
 elif menu == "Statistics":
-    afficher_image_fond("Logo_2.png")
+    
     st.title("Reading Insights")
     # Petit graph simple pour le look
     chart_data = pd.DataFrame([10, 15, 30, 20, 5, 25], index=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'])
