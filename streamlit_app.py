@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from item_to_reco import afficher_recommandations
 from Bandeau import afficher_bandeau_covers
-form Photo_Fond import afficher_image_fond
+from Photo_Fond import afficher_image_fond
 
 
 # 1. CONFIGURATION DE LA PAGE
