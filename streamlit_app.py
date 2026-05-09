@@ -44,7 +44,7 @@ st.markdown(f"""
     [data-testid="stSidebar"] label {{ 
         color: #FFFFFF !important;
         font-family: 'Playfair Display', serif !important; /* La police Fancy */
-        font-size: 1.1rem !important;
+        font-size: 1.1rem;
     }}
     
     /* 3. Style pour l'image du logo */
@@ -91,10 +91,9 @@ df_items, df_reco, df_enriched = load_data()
 with st.sidebar:
     st.markdown("<h1 style='text-align: center; font-size: 4rem; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
     
-  
-    
+
     st.image("Logo_1.png", width=250) 
-    
+
     st.markdown("<p style='font-style: italic; margin-top: 10px;'>Dive into stories. Grow your world</p>", unsafe_allow_html=True)
 
     
