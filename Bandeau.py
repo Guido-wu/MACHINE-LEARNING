@@ -32,12 +32,3 @@ def load_data():
     return df_items, df_reco, df_enriched
 
 df_items, df_reco, df_enriched = load_data()
-
-# --- 3. EXÉCUTION ---
-# Titre...
-st.title("Welcome to Omega Books")
-
-# Maintenant l'appel à la ligne 78 fonctionnera car la fonction est définie plus haut !
-afficher_bandeau_covers(df_enriched) 
-
-# ... reste du code ...
