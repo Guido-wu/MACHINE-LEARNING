@@ -60,14 +60,21 @@ st.markdown(f"""
 
     /* Creation des boutons sidebar */
     
-    /* Cache l'input radio physique */
-    div[role="radiogroup"] div[data-baseweb="radio"] > div:first-child {{
-        display: none !important; /* Cache le cercle */
-    }}
 
-    div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] {{
-        background-color: transparent !important; /* Supprime la bulle grise sur le texte */
-        padding: 0 !important;
+
+
+
+
+
+    /* Cache l'input radio physique */
+    [data-testid="stSidebar"] input[type="radio"] {{
+        display: none !important;
+    }}
+    
+    /* Cible spécifiquement le cercle rouge/blanc de Streamlit */
+    [data-testid="stSidebar"] div[data-baseweb="radio"] > div {{
+        display: none !important;
+        background-color: transparent !important;
     }}
 
     /* Cache le cercle blanc/rouge de Streamlit */
