@@ -59,15 +59,15 @@ st.markdown(f"""
     <style>
 
     /* Creation des boutons sidebar */
-
-
-    div[data-testid="stMarkdownContainer"] + div[role="radiogroup"] > div {{
-        background: transparent !important;
-    }}
     
     /* Cache l'input radio physique */
-    input[type="radio"] {{
-        display: none !important;
+    div[role="radiogroup"] div[data-baseweb="radio"] > div:first-child {{
+        display: none !important; /* Cache le cercle */
+    }}
+
+    div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] {{
+        background-color: transparent !important; /* Supprime la bulle grise sur le texte */
+        padding: 0 !important;
     }}
 
     /* Cache le cercle blanc/rouge de Streamlit */
@@ -77,13 +77,14 @@ st.markdown(f"""
     
     /* 2. CRÉATION DU BOUTON SOBRE */
     div[role="radiogroup"] label {{
-        background-color: transparent !important;
-        border-radius: 10px !important;
-        padding: 10px 15px !important;
-        margin-bottom: 5px !important;
+        background-color: transparent !important; /* Fond transparent par défaut */
+        border-radius: 12px !important;
+        padding: 12px 20px !important;
+        margin-bottom: 8px !important;
         width: 100% !important;
-        transition: background-color 0.3s ease !important;
-        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        align-items: center !important;
         border: none !important;
     }}
 
@@ -92,10 +93,11 @@ st.markdown(f"""
         background-color: rgba(255, 255, 255, 0.1) !important;
     }}
 
-    /* 4. STYLE DE L'OPTION SÉLECTIONNÉE */
-    div[role="radiogroup"] label[data-baseweb="radio"] div:first-child {{
-         background-color: rgba(255, 255, 255, 0.2) !important;
-         border-radius: 10px !important;
+    /* 4. L'ÉLÉMENT SÉLECTIONNÉ RESTE CLAIR (ACTIVE) */
+    /* On cible le label qui contient l'input coché */
+    div[role="radiogroup"] label:has(input:checked) {{
+        background-color: rgba(255, 255, 255, 0.2) !important; /* Reste plus clair */
+        border-left: 4px solid white !important; /* Petit trait blanc pour marquer la position */
     }}
     
     /* On force la couleur du texte en blanc */
