@@ -25,7 +25,7 @@ st.markdown(f"""
 
     /* Sidebar en Vert Forêt */
     [data-testid="stSidebar"] {{
-        background-color: #1f6f43;
+        background-color: #f5a623;
     }}
     
     /* 1. On importe la police depuis Google */
