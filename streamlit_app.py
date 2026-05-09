@@ -163,6 +163,15 @@ def get_base64(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
+#Backgroud logo
+try:
+      bin_str = get_base64("Logo_2.png") 
+    st.markdown(
+        f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',            
+        unsafe_allow_html=True
+        )
+ except:
+    pass
 
 
 # 4. SIDEBAR (MENU DE GAUCHE)
@@ -191,15 +200,6 @@ with st.sidebar:
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "Home":
     
-    #Backgroud logo
-    try:
-        bin_str = get_base64("Logo_2.png") 
-        st.markdown(
-            f'<img src="data:image/png;base64,{bin_str}" class="background-logo">',
-            unsafe_allow_html=True
-        )
-    except:
-        pass
 
 
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
