@@ -8,6 +8,7 @@ from pathlib import Path
 # ---------------------------------------------------------
 def generate_fallback_cover(title, author, rank=None):
     short_title = title[:35] + "..." if len(title) > 35 else title
+    author = str(author) if author and str(author) != 'nan' else 'Unknown'
     short_author = author[:25] + "..." if len(author) > 25 else author
 
     medal = ""
@@ -140,7 +141,8 @@ def afficher_top_books(df_enriched, df_interactions):
         # Cover
         cover_url = row.get('api_thumbnail', None)
         if pd.isna(cover_url) or not cover_url:
-            cover_url = generate_fallback_cover(row['Title'], row['Author'], rank)
+            author = row['Author'] if 'Author' in row.index else ''
+            cover_url = generate_fallback_cover(row['Title'], author, rank)
             img_w, img_h = 110, 155
         else:
             img_w, img_h = 110, 155
@@ -216,7 +218,7 @@ def afficher_new_releases(df_enriched):
     for _, row in top_recent.iterrows():
         cover_url = row.get('api_thumbnail', None)
         if pd.isna(cover_url) or not cover_url:
-            cover_url = generate_fallback_cover(row['Title'], row.get('Author', ''))
+            cover_url = generate_fallback_cover(row['Title'], row['Author'] if 'Author' in row.index else '')
 
         short_title = row['Title'][:28] + "..." if len(str(row['Title'])) > 28 else row['Title']
         year = int(row['year']) if not pd.isna(row['year']) else "?"
