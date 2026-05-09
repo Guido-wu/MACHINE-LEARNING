@@ -56,15 +56,43 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
 
-
-    /* Boutons et éléments interactifs */
-    .stButton>button {{
-        background-color: #1f6f43;
-        color: white;
-        border-radius: 20px;
-        border: none;
-        padding: 10px 25px;
+    <style>
+    /* 1. On cache les petits ronds (radio buttons) */
+    [data-testid="stSidebarNavLink"] div:has(input) {{
+        display: none !important;
     }}
+    
+    /* 2. On transforme chaque option du menu en gros bouton élégant */
+    [data-testid="stSidebarNav"] li {{
+        background-color: transparent;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        transition: all 0.3s ease;
+    }}  
+
+    /* 3. Effet quand on passe la souris dessus (Hover) */
+    [data-testid="stSidebarNav"] li:hover {{
+        background-color: rgba(255, 255, 255, 0.1); /* Couleur plus claire au survol */
+        transform: translateX(5px); /* Petit mouvement vers la droite */
+    }}
+
+    /* 4. Style de l'option sélectionnée (comme sur votre image d'inspi) */
+    [data-testid="stSidebarNav"] li:has(a[aria-current="page"]) {{
+        background-color: #3e8e5d !important; /* Vert plus clair pour l'actif */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }}
+
+    /* 5. On ajuste le texte à l'intérieur */
+    [data-testid="stSidebarNav"] a {{
+        color: white !important;
+        font-family: 'Lora', serif !important;
+        font-size: 1.1rem !important;
+        text-decoration: none !important;
+        padding: 10px 15px !important;
+    }}
+    </style>
+    
+
 
     /* Style des cartes blanches */
     .book-card {{
@@ -89,8 +117,7 @@ df_items, df_reco, df_enriched = load_data()
 
 # 4. SIDEBAR (MENU DE GAUCHE)
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center; font-size: 4rem; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
-    
+    st.markdown("<h1 style='text-align: center; font-size: 3rem; margin-bottom: 0;'>The Bookworm</h1>", unsafe_allow_html=True)
 
     st.image("Logo_1.png", width=250) 
 
@@ -104,7 +131,7 @@ with st.sidebar:
         index=0
     )
     st.markdown("---")
-    st.write("Welcome back, Reader!")
+    
 
 
 
