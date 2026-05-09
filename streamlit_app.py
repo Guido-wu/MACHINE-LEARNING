@@ -224,12 +224,6 @@ if menu == "Home":
     col1, col2 = st.columns([2,1])
 
     with col1:
-        st.markdown("""
-            <div class="book-card">
-                <h3 style="color: #1f6f43;">Quote of the Day</h3>
-                <p>"A room without books is like a body without a soul." - Marcus Tullius Cicero</p>
-            </div>
-        """, unsafe_allow_html=True)
         
         afficher_quote_of_the_day(df_quotes)
 
