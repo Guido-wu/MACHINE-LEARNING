@@ -90,9 +90,7 @@ st.markdown(f"""
         text-decoration: none !important;
         padding: 10px 15px !important;
     }}
-    </style>
     
-
 
     /* Style des cartes blanches */
     .book-card {{
@@ -122,13 +120,15 @@ with st.sidebar:
     st.image("Logo_1.png", width=250) 
 
     st.markdown("<p style='font-style: italic; margin-top: 10px;'>Dive into stories. Grow your world</p>", unsafe_allow_html=True)
-
-    
     st.markdown("---")
+
+    st.markdown("<p style='color:white; font-weight:bold; opacity:0.8;'>NAVIGATION</p>", unsafe_allow_html=True)
+
     menu = st.radio(
         "Navigation",
         ["🏠 Home", "📚 My Library", "✨ Recommendations", "📊 Statistics"],
         index=0
+        label_visibility="collapsed"
     )
     st.markdown("---")
     
@@ -142,13 +142,9 @@ with st.sidebar:
 
 # 5. CONTENU PRINCIPAL - Chaque page de notre site 
 if menu == "🏠 Home":
+
     st.markdown("<h1 style='color: #1a1a1a;'>Welcome to The Bookworm</h1>", unsafe_allow_html=True)
     
-
-
-
-
-
     # Ton bandeau défilant (Resolution Boosted)
     afficher_bandeau_covers(df_enriched)
     
