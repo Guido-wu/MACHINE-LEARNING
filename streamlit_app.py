@@ -5,7 +5,7 @@ import os
 from item_to_reco import afficher_recommandations
 from Bandeau import afficher_bandeau_covers
 from Photo_Fond import afficher_image_fond, get_base64_of_bin_file
-
+from Quote import afficher_quote_of_the_day
 
 # 1. CONFIGURATION DE LA PAGE
 st.set_page_config(
@@ -163,12 +163,12 @@ def load_data():
     df_items = pd.read_csv("items.csv")
     df_reco = pd.read_csv("final_submission-2.csv")
     df_enriched = pd.read_csv("items_enriched_api.csv")
-    return df_items, df_reco, df_enriched
+    df_quotes = pd.read_csv("quotes.csv")
+    return df_items, df_reco, df_enriched, df_quotes
 
-df_items, df_reco, df_enriched = load_data()
+df_items, df_reco, df_enriched, df_quotes = load_data()
 
 
-    
 
 
 
@@ -231,7 +231,7 @@ if menu == "Home":
             </div>
         """, unsafe_allow_html=True)
         
-       
+        afficher_quote_of_the_day(df_quotes)
 
     with col2:
         st.image("Logo_3.png", width=250) 
