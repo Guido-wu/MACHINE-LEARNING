@@ -316,10 +316,16 @@ def page_css() -> None:
 
 
 def sidebar(active: str) -> str:
-    st.sidebar.markdown(
-        """
-        <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
-          <div style="font-size:4.4rem;line-height:1">🐛</div>
+
+  logo_path = "/Users/guido/Documents/EPFL/2025_2026/MA - 2/MACHINE LEARNING/a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png" 
+
+  st.sidebar.markdown(
+      f"""
+      <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
+          <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+            <img src="data:image/png;base64,{get_image_base64(logo_path)}" 
+                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+          </div>
           <div class="serif" style="font-size:2rem;font-weight:700;line-height:1.05">The<br>Bookworm</div>
           <div style="margin-top:.8rem;font-size:.95rem;color:#fff0bc">Dive into stories.<br>Grow your world.</div>
         </div>
