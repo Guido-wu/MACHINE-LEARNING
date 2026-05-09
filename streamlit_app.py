@@ -46,6 +46,14 @@ st.markdown(f"""
         font-family: 'Playfair Display', serif !important; /* La police Fancy */
         font-size: 1.1rem;
     }}
+    [data-testid="stSidebar"] label[data-baseweb="radio"] p {{
+        font-family: 'Playfair Display', serif !important; /* La même que le titre */
+        font-size: 1.3rem !important; /* Un peu plus grand pour l'élégance */
+        color: white !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        padding-left: 10px !important;
+    }}
     
     /* 3. Style pour l'image du logo */
     .logo-img {{
