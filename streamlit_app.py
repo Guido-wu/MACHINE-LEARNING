@@ -94,7 +94,7 @@ with st.sidebar:
         <div style='text-align: center; padding-bottom: 20px;'>
             <p style='
                 font-family: "Playfair Display", serif !important;
-                font-size: 55px !important; 
+                font-size: 70px !important; 
                 font-weight: 800 !important; 
                 color: #FFFFFF !important;
                 line-height: 1 !important;
@@ -107,7 +107,7 @@ with st.sidebar:
 
 
     # 2. Le Logo et la phrase côte à côte
-    col_logo, col_text = st.columns([1, 2.5]) # Ajustez les chiffres [1, 2] pour la largeur relative
+    col_logo, col_text = st.columns([1, 4]) # Ajustez les chiffres [1, 2] pour la largeur relative
     
     with col_logo:
         # On utilise le nom de fichier corrigé suite à l'erreur précédente
