@@ -2,6 +2,12 @@ import streamlit as st  # <--- IL MANQUE CETTE LIGNE
 import base64
 import os
 
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+
 
 def afficher_image_fond(nom_fichier):
     import base64

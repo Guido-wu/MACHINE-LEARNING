@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from item_to_reco import afficher_recommandations
 from Bandeau import afficher_bandeau_covers
-from Photo_Fond import afficher_image_fond
+from Photo_Fond import afficher_image_fond, get_base64_of_bin_file
 
 
 # 1. CONFIGURATION DE LA PAGE
@@ -14,6 +14,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+
+
 
 # 2. DESIGN CSS (Le "Beige" et le "Vert")
 st.markdown(f"""
