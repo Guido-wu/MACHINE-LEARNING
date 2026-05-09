@@ -17,8 +17,6 @@ def get_image_base64(path):
 
 
 
-
-
 COLORS = {
     "cream": "#fff8e8",
     "paper": "#fffaf0",
@@ -328,29 +326,30 @@ def page_css() -> None:
 
 
 def sidebar(active: str) -> str:
+    # 1. On définit le logo
+    logo_path = "a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png" 
+    img_base64 = get_image_base64(logo_path) 
 
-  logo_path = "a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png"
-
-  st.sidebar.markdown(
-      f"""
-      <style>
-            /* Cache le petit point rouge du bouton radio */
+    
+    st.sidebar.markdown(
+        f"""
+        <style>
+            /* Ton code pour cacher le point rouge */
             [data-testid="stSidebar"] div[role="radiogroup"] > label > div:first-child {{
                 display: none !important;
             }}
-            /* Style pour que le texte soit bien centré sans le point */
+            /* Ton code pour le décalage du texte */
             [data-testid="stSidebar"] div[role="radiogroup"] label {{
                 padding-left: 15px !important;
             }}
+        </style>
 
-
-      <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
+        <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
           <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-            <img src="data:image/png;base64,{get_image_base64(logo_path)}" 
-                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+            <img src="data:image/png;base64,{img_base64}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
           </div>
-          <div class="serif" style="font-size:2rem;font-weight:700;line-height:1.05">The<br>Bookworm</div>
-          <div style="margin-top:.8rem;font-size:.95rem;color:#fff0bc">Dive into stories.<br>Grow your world.</div>
+          <div class="serif" style="font-size:2rem;font-weight:700;line-height:1.05; color:#fff6d6;">The<br>Bookworm</div>
+          <div style="margin-top:.8rem;font-size:.95rem;color:#fffbc">Dive into stories.<br>Grow your world.</div>
         </div>
         """,
         unsafe_allow_html=True,
