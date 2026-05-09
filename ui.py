@@ -6,6 +6,18 @@ from typing import Iterable
 import pandas as pd
 import streamlit as st
 
+def get_image_base64(path):
+    try:
+        with open(path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode()
+    except Exception:
+        return "" # Si l'image n'est pas trouvée, on ne crash pas
+
+
+
+
+
+
 
 COLORS = {
     "cream": "#fff8e8",
@@ -317,10 +329,21 @@ def page_css() -> None:
 
 def sidebar(active: str) -> str:
 
-  logo_path = "/Users/guido/Documents/EPFL/2025_2026/MA - 2/MACHINE LEARNING/a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png" 
+  logo_path = "a9e8a2a7-e0a4-422d-b5a9-57ae442fb57a.png"
 
   st.sidebar.markdown(
       f"""
+      <style>
+            /* Cache le petit point rouge du bouton radio */
+            [data-testid="stSidebar"] div[role="radiogroup"] > label > div:first-child {{
+                display: none !important;
+            }}
+            /* Style pour que le texte soit bien centré sans le point */
+            [data-testid="stSidebar"] div[role="radiogroup"] label {{
+                padding-left: 15px !important;
+            }}
+
+
       <div style="padding:1.2rem .8rem 1.6rem;text-align:center">
           <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
             <img src="data:image/png;base64,{get_image_base64(logo_path)}" 
