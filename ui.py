@@ -355,7 +355,7 @@ def sidebar(active: str) -> str:
         """,
         unsafe_allow_html=True,
     )
-    pages = [
+  pages = [
         "Home",
         "My Library",
         "Recommendations",
@@ -366,8 +366,8 @@ def sidebar(active: str) -> str:
         "Challenges",
         "Bookmarks",
     ]
-    choice = st.sidebar.radio("Navigation", pages, index=pages.index(active), label_visibility="collapsed")
-    st.sidebar.markdown(
+  choice = st.sidebar.radio("Navigation", pages, index=pages.index(active), label_visibility="collapsed")
+  st.sidebar.markdown(
         """
         <div style="height:14rem"></div>
         <div style="padding:1rem;text-align:center">
@@ -377,7 +377,7 @@ def sidebar(active: str) -> str:
         """,
         unsafe_allow_html=True,
     )
-    return choice
+  return choice
 
 
 def header(title: str, subtitle: str, search_label: str = "Search for books, authors, genres...") -> str:
