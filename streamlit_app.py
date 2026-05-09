@@ -93,7 +93,7 @@ with st.sidebar:
     
   
     
-    st.image("Logo_1.png", width=160) 
+    st.image("Logo_1.png", width=250, caption="Your personal book companion", use_column_width=False, clamp=True, output_format="PNG", channels="RGB", class_="logo-img") 
         
     
     st.markdown("<p style='font-style: italic; margin-top: 10px;'>Dive into stories. Grow your world</p>", unsafe_allow_html=True)
