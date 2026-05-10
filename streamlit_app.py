@@ -254,7 +254,9 @@ elif menu == "Recommendations":
 elif menu == "My Library":
     
     st.title("My Library")
-    st.dataframe(df_items.head(50)) # Exemple d'affichage
+    user_id = st.number_input("Enter your User ID:", min_value=0, step=1)
+    if st.button("Load my books"):
+        afficher_my_library(user_id, df_interactions, df_categories, df_enriched)
 
 
 
