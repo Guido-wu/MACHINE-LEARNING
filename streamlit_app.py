@@ -265,5 +265,5 @@ elif menu == "My Library":
 
 elif menu == "New User":
     
-    st.title("🆕 Get your first recommendations")
+    st.title("Get your first recommendations")
     afficher_cold_start(df_categories, df_interactions, df_reco, df_enriched)

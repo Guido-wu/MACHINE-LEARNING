@@ -142,7 +142,7 @@ def step_books(df_categories, df_interactions, df_enriched):
         title   = safe_str(row['Title'],  'Unknown')
         author  = safe_str(row['Author'], 'Unknown')
         cat     = safe_str(row['Catégorie'], '')
-        icon    = CATEGORY_ICONS.get(cat, "📚")
+        icon    = CATEGORY_ICONS.get(cat, "")
         is_sel  = item_id in selected_books
 
         cover = safe_cover(row)
@@ -285,7 +285,7 @@ def step_books(df_categories, df_interactions, df_enriched):
 
     nb = len(parsed)
     if nb > 0:
-        st.markdown(f"<p style='color:#1f6f43; font-size:0.85rem;'>✅ {nb} book(s) selected</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='color:#1f6f43; font-size:0.85rem;'> {nb} book(s) selected</p>", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
@@ -349,7 +349,7 @@ def step_recommendations(df_interactions, df_reco, df_enriched):
                     box-shadow:0 4px 12px rgba(0,0,0,0.06); margin-bottom:20px;
                     border-left:4px solid #1f6f43;">
             <p style="font-family:'Playfair Display',serif; color:#1f6f43; font-size:1rem; margin-bottom:4px;">
-                ✅ We found your reader twin!
+                We found your reader twin!
             </p>
             <p style="color:#555; font-size:0.82rem;">
                 Based on your <strong>{len(selected_books)} selected books</strong> across
