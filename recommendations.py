@@ -73,7 +73,7 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
     books_js += "];\n"
 
     nb_rows = -(-len(df_books) // 3)
-    height  = 180 + nb_rows * 320
+    height  = 60 + nb_rows * 305
 
     full_html = f"""
     <!DOCTYPE html>
@@ -259,8 +259,10 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             z-index: 1000;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding-top: 40px;
+            overflow-y: auto;
         }}
         .modal-overlay.active {{
             display: flex;
