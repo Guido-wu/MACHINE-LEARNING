@@ -2,12 +2,13 @@ import streamlit as st
 import base64
 import pandas as pd
 import os
-from item_to_reco import afficher_recommandations
+
 from Bandeau import afficher_bandeau_covers
 from Photo_Fond import afficher_image_fond, get_base64_of_bin_file
 from Quote import afficher_quote_of_the_day
 from top_books import afficher_top_books, afficher_new_releases
 from my_library import afficher_my_library
+from recommendations import afficher_recommandations
 
 
 
@@ -245,9 +246,11 @@ if menu == "Home":
 
 elif menu == "Recommendations":
       
-    user_id = st.number_input("Enter User ID :", min_value=0, max_value=len(df_reco)-1, step=1)
-    if st.button("Get Recommendations"):
-        afficher_recommandations(user_id, df_reco, df_items)
+    st.title("✨ Book Recommendations")
+    user_id = st.number_input("Enter your User ID:", min_value=0,
+                               max_value=len(df_reco)-1, step=1)
+    if st.button("Get my recommendations"):
+        afficher_recommandations(user_id, df_reco, df_enriched)
 
 
 
