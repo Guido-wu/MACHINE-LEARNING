@@ -9,7 +9,7 @@ from Quote import afficher_quote_of_the_day
 from top_books import afficher_top_books, afficher_new_releases
 from my_library import afficher_my_library
 from recommendations import afficher_recommandations
-
+from cold_start import afficher_cold_start
 
 
 # 1. CONFIGURATION DE LA PAGE
@@ -186,7 +186,7 @@ with st.sidebar:
 
     menu = st.radio(
         "Navigation",
-        ["Home", "My Library", "Recommendations", "Statistics"],
+        ["Home", "My Library", "Recommendations", "New User"],
         index=0,
         label_visibility="collapsed"
     )
@@ -263,9 +263,7 @@ elif menu == "My Library":
 
 
 
-elif menu == "Statistics":
+elif menu == "New User":
     
-    st.title("Reading Insights")
-    # Petit graph simple pour le look
-    chart_data = pd.DataFrame([10, 15, 30, 20, 5, 25], index=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'])
-    st.bar_chart(chart_data)
+    st.title("🆕 Get your first recommendations")
+    afficher_cold_start(df_categories, df_interactions, df_reco, df_enriched)
