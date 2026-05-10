@@ -6,14 +6,12 @@ from top_books import safe_str, safe_cover, generate_fallback_cover
 
 def afficher_recommandations(user_id, df_reco, df_enriched):
 
-    # --- Trouver les recommandations ---
     row = df_reco[df_reco['user_id'] == user_id]
     if row.empty:
         st.error(f"❌ No recommendations found for User {user_id}.")
         return
 
     reco_ids = [int(x) for x in str(row['recommendation'].values[0]).split()][:10]
-
     df_books = df_enriched[df_enriched['i'].isin(reco_ids)].copy()
     df_books['reco_order'] = df_books['i'].apply(lambda x: reco_ids.index(x) if x in reco_ids else 99)
     df_books = df_books.sort_values('reco_order').reset_index(drop=True)
@@ -21,8 +19,10 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
     def esc(s):
         return str(s).replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;').replace("'",'&#39;')
 
-    # --- Construire les cartes ---
+    # --- Construire les données JS pour le modal ---
+    books_js = "const BOOKS = [\n"
     cards_html = ""
+
     for rank, (_, book) in enumerate(df_books.iterrows(), start=1):
         title  = safe_str(book['Title'],  'Unknown Title')
         author = safe_str(book['Author'], 'Unknown Author')
@@ -32,36 +32,49 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             desc = safe_str(book.get('description_x', None), '')
         if not desc or desc == 'Unknown':
             desc = "No description available for this book."
-        desc_short = desc[:250] + "…" if len(desc) > 250 else desc
 
         cover = safe_cover(book)
         if not cover:
             cover = generate_fallback_cover(title, author)
 
-        cards_html += f"""
-        <div class="flip-container" onclick="this.classList.toggle('flipped')">
-            <div class="flip-inner">
+        # Stocker les données complètes en JS pour le modal
+        books_js += f"""  {{
+    rank: {rank},
+    title: "{esc(title)}",
+    author: "{esc(author)}",
+    desc: "{esc(desc)}",
+    cover: "{cover if not cover.startswith('data:image/svg') else 'SVG'}"
+  }},\n"""
 
+        desc_short = desc[:160] + "…" if len(desc) > 160 else desc
+        has_more = len(desc) > 160
+
+        cards_html += f"""
+        <div class="flip-container" id="card-{rank}" onclick="handleFlip(event, {rank})">
+            <div class="flip-inner">
                 <div class="flip-front">
                     <span class="flip-rank">#{rank}</span>
                     <img src="{cover}" alt="{esc(title)}"/>
                     <span class="flip-hint">tap to flip</span>
                 </div>
-
                 <div class="flip-back">
                     <div class="back-rank">#{rank}</div>
                     <div class="back-title">{esc(title)}</div>
                     <div class="back-author">{esc(author)}</div>
                     <div class="back-desc">{esc(desc_short)}</div>
+                    {"" if not has_more else f'<button class="read-more-btn" onclick="openModal(event, {rank})">Read more →</button>'}
                     <div class="back-hint">tap to flip back</div>
                 </div>
-
             </div>
             <div class="card-label">{esc(title[:32] + ('…' if len(title) > 32 else ''))}</div>
         </div>
         """
 
-    # --- HTML complet dans components.html (JS autorisé ici) ---
+    books_js += "];\n"
+
+    nb_rows = -(-len(df_books) // 3)
+    height  = 180 + nb_rows * 320
+
     full_html = f"""
     <!DOCTYPE html>
     <html>
@@ -93,7 +106,6 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             gap: 28px 20px;
         }}
 
-        /* Flip container */
         .flip-container {{
             display: flex;
             flex-direction: column;
@@ -120,7 +132,6 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             overflow: hidden;
         }}
 
-        /* Recto */
         .flip-front {{
             background: #e8dfc8;
             transform: rotateY(0deg);
@@ -158,7 +169,6 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             border-radius: 10px;
         }}
 
-        /* Verso */
         .flip-back {{
             background: linear-gradient(145deg, #1f6f43 0%, #155230 100%);
             transform: rotateY(180deg);
@@ -200,10 +210,28 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             font-size: 0.5rem;
             color: rgba(255,255,255,0.35);
             text-align: center;
-            margin-top: 8px;
+            margin-top: 6px;
         }}
 
-        /* Label sous la carte */
+        /* Bouton Read more */
+        .read-more-btn {{
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: white;
+            font-size: 0.6rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Lora', serif;
+            margin-top: 6px;
+            transition: background 0.2s;
+            width: fit-content;
+            align-self: flex-end;
+        }}
+        .read-more-btn:hover {{
+            background: rgba(255,255,255,0.28);
+        }}
+
         .card-label {{
             font-size: 0.68rem;
             color: #444;
@@ -220,19 +248,178 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
         .flip-container.flipped .flip-back {{
             transform: rotateY(0deg);
         }}
+
+        /* ====== MODAL OVERLAY ====== */
+        .modal-overlay {{
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }}
+        .modal-overlay.active {{
+            display: flex;
+            animation: fadeIn 0.25s ease;
+        }}
+        @keyframes fadeIn {{
+            from {{ opacity: 0; }}
+            to   {{ opacity: 1; }}
+        }}
+
+        .modal-card {{
+            background: linear-gradient(145deg, #1f6f43, #155230);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            width: 85%;
+            max-width: 480px;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }}
+        @keyframes scaleIn {{
+            from {{ transform: scale(0.7); opacity: 0; }}
+            to   {{ transform: scale(1);   opacity: 1; }}
+        }}
+
+        /* Image à gauche dans le modal */
+        .modal-cover {{
+            width: 140px;
+            min-width: 140px;
+            border-radius: 20px 0 0 20px;
+            object-fit: cover;
+        }}
+
+        /* Contenu à droite */
+        .modal-content {{
+            padding: 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }}
+        .modal-rank {{
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.45);
+            font-family: 'Playfair Display', serif;
+        }}
+        .modal-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: white;
+            line-height: 1.3;
+        }}
+        .modal-author {{
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.65);
+            font-style: italic;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }}
+        .modal-desc {{
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.65;
+            font-family: 'Lora', serif;
+            flex: 1;
+        }}
+        .modal-close {{
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }}
+        .modal-close:hover {{
+            background: rgba(255,255,255,0.3);
+        }}
     </style>
     </head>
     <body>
+
         <div class="section-title">✨ Top 10 Recommendations for User {user_id}</div>
         <div class="flip-grid">
             {cards_html}
         </div>
+
+        <!-- Modal overlay -->
+        <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+            <div class="modal-card" id="modal-card">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <img class="modal-cover" id="modal-cover" src="" alt=""/>
+                <div class="modal-content">
+                    <div class="modal-rank"  id="modal-rank"></div>
+                    <div class="modal-title" id="modal-title"></div>
+                    <div class="modal-author" id="modal-author"></div>
+                    <div class="modal-desc"  id="modal-desc"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        {books_js}
+
+        function handleFlip(event, rank) {{
+            // Ne pas flipper si on clique sur Read more
+            if (event.target.classList.contains('read-more-btn')) return;
+            const card = document.getElementById('card-' + rank);
+            card.classList.toggle('flipped');
+        }}
+
+        function openModal(event, rank) {{
+            event.stopPropagation();
+            const b = BOOKS[rank - 1];
+
+            document.getElementById('modal-rank').textContent   = '#' + b.rank;
+            document.getElementById('modal-title').textContent  = b.title;
+            document.getElementById('modal-author').textContent = b.author;
+            document.getElementById('modal-desc').textContent   = b.desc;
+
+            const coverEl = document.getElementById('modal-cover');
+            if (b.cover === 'SVG') {{
+                coverEl.style.display = 'none';
+            }} else {{
+                coverEl.src = b.cover;
+                coverEl.style.display = 'block';
+            }}
+
+            document.getElementById('modal').classList.add('active');
+        }}
+
+        function closeModal() {{
+            document.getElementById('modal').classList.remove('active');
+        }}
+
+        function closeModalOutside(event) {{
+            if (event.target === document.getElementById('modal')) closeModal();
+        }}
+
+        // Fermer avec Escape
+        document.addEventListener('keydown', function(e) {{
+            if (e.key === 'Escape') closeModal();
+        }});
+        </script>
     </body>
     </html>
     """
 
-    # Hauteur dynamique selon nb de lignes (3 par ligne)
-    nb_rows = -(-len(df_books) // 3)  # arrondi supérieur
-    height  = 120 + nb_rows * 310
-
-    components.html(full_html, height=height, scrolling=False)
+    components.html(full_html, height=height, scrolling=True)
