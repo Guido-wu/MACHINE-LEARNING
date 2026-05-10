@@ -7,6 +7,7 @@ from Bandeau import afficher_bandeau_covers
 from Photo_Fond import afficher_image_fond, get_base64_of_bin_file
 from Quote import afficher_quote_of_the_day
 from top_books import afficher_top_books, afficher_new_releases
+from my_library import afficher_my_library
 
 
 
@@ -168,9 +169,11 @@ def load_data():
     df_enriched = pd.read_csv("items_enriched_api.csv")
     df_quotes = pd.read_csv("quotes.csv")
     df_interactions = pd.read_csv("interactions_train.csv")
-    return df_items, df_reco, df_enriched, df_quotes, df_interactions
+    df_categories = pd.read_csv("items_with_categories.csv")
+    return df_items, df_reco, df_enriched, df_quotes, df_interactions, df_categories
 
-df_items, df_reco, df_enriched, df_quotes, df_interactions = load_data()
+df_items, df_reco, df_enriched, df_quotes, df_interactions, df_categories = load_data()
+
 
 
 
