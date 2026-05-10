@@ -180,13 +180,12 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
 
     st.markdown(f'<div class="reco-header">✨ Top 10 Recommendations for User {user_id}</div>', unsafe_allow_html=True)
 
-    html = '<div class="flip-grid">'
+    st.markdown('<div class="flip-grid">', unsafe_allow_html=True)
 
     for rank, (_, book) in enumerate(df_books.iterrows(), start=1):
         title  = safe_str(book['Title'], 'Unknown Title')
         author = safe_str(book['Author'], 'Unknown Author')
 
-        # Description : api_description en priorité, sinon description_x
         desc = safe_str(book.get('api_description', None), '')
         if not desc or desc == 'Unknown':
             desc = safe_str(book.get('description_x', None), '')
@@ -195,22 +194,21 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
 
         desc_short = desc[:200] + "…" if len(desc) > 200 else desc
 
-        # Échapper les caractères spéciaux HTML
         def esc(s):
             return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;').replace("'",'&#39;')
 
-        title_esc  = esc(title)
-        author_esc = esc(author)
-        desc_esc   = esc(desc_short)
+        title_esc   = esc(title)
+        author_esc  = esc(author)
+        desc_esc    = esc(desc_short)
         title_short = title[:28] + "…" if len(title) > 28 else title
 
-        # Cover
         cover = safe_cover(book)
         if not cover:
             cover = generate_fallback_cover(title, author)
 
-        html += f"""
-        <div style="display:flex;flex-direction:column;align-items:center;">
+        # Une carte à la fois → pas de limite de taille
+        st.markdown(f"""
+        <div style="display:inline-flex;flex-direction:column;align-items:center;margin:10px;">
             <div class="flip-container" onclick="flipCard(this)">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -228,7 +226,6 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
             </div>
             <div class="reco-card-label">{esc(title_short)}</div>
         </div>
-        """
+        """, unsafe_allow_html=True)
 
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
