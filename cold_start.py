@@ -115,55 +115,52 @@ def step_books(df_categories, df_interactions, df_enriched):
     if 'cold_start_books' not in st.session_state:
         st.session_state['cold_start_books'] = []
 
-    # Affichage en grille 5 colonnes
+    # Affichage en grille 5 colonnes — st.image() evite le bug HTML base64
     N_COLS = 5
     for row_start in range(0, len(df_20), N_COLS):
         row_df = df_20.iloc[row_start:row_start + N_COLS]
         cols   = st.columns(N_COLS)
 
         for col_idx, (_, book) in enumerate(row_df.iterrows()):
-            item_id = int(book['i'])
-            title   = safe_str(book['Title'],  'Unknown')
-            author  = safe_str(book['Author'], 'Unknown')
-            cat     = safe_str(book['Catégorie'], '')
-            icon    = CATEGORY_ICONS.get(cat, "📚")
-            is_sel  = item_id in st.session_state['cold_start_books']
-
-            cover = safe_cover(book)
-            if not cover:
-                cover = generate_fallback_cover(title, author)
+            item_id   = int(book['i'])
+            title     = safe_str(book['Title'],  'Unknown')
+            author    = safe_str(book['Author'], 'Unknown')
+            cat       = safe_str(book['Catégorie'], '')
+            icon      = CATEGORY_ICONS.get(cat, '📚')
+            is_sel    = item_id in st.session_state['cold_start_books']
+            cover_url = safe_cover(book)
 
             with cols[col_idx]:
-                border_color = "#1f6f43" if is_sel else "rgba(0,0,0,0.08)"
-                overlay_html = """
-                    <div style="position:absolute;top:0;left:0;width:100%;height:100%;
-                        background:rgba(31,111,67,0.52);border-radius:9px;
-                        display:flex;align-items:center;justify-content:center;
-                        font-size:2.2rem;color:white;font-weight:bold;">✓</div>
-                """ if is_sel else ""
+                border = "#1f6f43" if is_sel else "rgba(0,0,0,0.08)"
+                check_icon = "✅ " if is_sel else ""
 
-                st.markdown(f"""
-                    <div style="display:flex;flex-direction:column;align-items:center;
-                                gap:4px;margin-bottom:2px;">
-                        <div style="position:relative;border:3px solid {border_color};
-                                    border-radius:10px;overflow:hidden;">
-                            <img src="{cover}" width="105" height="150"
-                                 style="display:block;object-fit:cover;"/>
-                            {overlay_html}
-                        </div>
-                        <span style="font-size:0.58rem;color:#1f6f43;font-weight:bold;
-                                     text-align:center;">{icon} {cat}</span>
-                        <span style="font-size:0.6rem;color:#333;font-style:italic;
-                                     text-align:center;line-height:1.3;max-width:105px;">
-                            {title[:24]}{'…' if len(title) > 24 else ''}
-                        </span>
-                    </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    f'<div style="border:3px solid {border};border-radius:10px;overflow:hidden;">',
+                    unsafe_allow_html=True
+                )
 
-                # Checkbox native — seul élément interactif
+                if cover_url:
+                    st.image(cover_url, width=105)
+                else:
+                    import base64 as _b64
+                    svg_data  = generate_fallback_cover(title, author)
+                    img_bytes = _b64.b64decode(svg_data.split(",", 1)[1])
+                    st.image(img_bytes, width=105)
+
+                st.markdown("</div>", unsafe_allow_html=True)
+
+                st.markdown(
+                    f"""<div style="text-align:center;margin-top:2px;margin-bottom:4px;">
+                        <span style="font-size:0.58rem;color:#1f6f43;font-weight:bold;">
+                            {check_icon}{icon} {cat}</span><br/>
+                        <span style="font-size:0.6rem;color:#333;font-style:italic;">
+                            {title[:24]}{"..." if len(title)>24 else ""}
+                        </span></div>""",
+                    unsafe_allow_html=True
+                )
+
                 checked = st.checkbox(
-                    "select",
-                    value=is_sel,
+                    "select", value=is_sel,
                     key=f"pick_{item_id}",
                     label_visibility="collapsed"
                 )
@@ -175,7 +172,7 @@ def step_books(df_categories, df_interactions, df_enriched):
                     st.session_state['cold_start_books'].remove(item_id)
                     st.rerun()
 
-        st.markdown("<br/>", unsafe_allow_html=True)
+        st.divider()
 
     nb = len(st.session_state['cold_start_books'])
 
