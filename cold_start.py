@@ -142,10 +142,17 @@ def step_books(df_categories, df_interactions, df_enriched):
                 if cover_url:
                     st.image(cover_url, width=105)
                 else:
-                    import base64 as _b64
-                    svg_data  = generate_fallback_cover(title, author)
-                    img_bytes = _b64.b64decode(svg_data.split(",", 1)[1])
-                    st.image(img_bytes, width=105)
+                    st.markdown(f'''
+                        <div style="width:105px;height:150px;background:#1f6f43;
+                                    border-radius:8px;display:flex;flex-direction:column;
+                                    align-items:center;justify-content:center;gap:6px;">
+                            <span style="font-size:1.5rem;">📖</span>
+                            <span style="font-size:0.55rem;color:white;text-align:center;
+                                         padding:0 6px;line-height:1.3;font-style:italic;">
+                                {title[:30]}
+                            </span>
+                        </div>
+                    ''', unsafe_allow_html=True)
 
                 st.markdown("</div>", unsafe_allow_html=True)
 
