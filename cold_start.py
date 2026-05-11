@@ -254,7 +254,7 @@ def step_recommendations(df_interactions, df_reco, df_enriched):
                     box-shadow:0 4px 12px rgba(0,0,0,0.06);margin-bottom:20px;
                     border-left:4px solid #1f6f43;">
             <p style="font-family:'Playfair Display',serif;color:#1f6f43;
-                      font-size:1rem;margin-bottom:4px;">✅ We found your reader twin!</p>
+                      font-size:1rem;margin-bottom:4px;">We found your reader twin!</p>
             <p style="color:#555;font-size:0.82rem;">
                 Based on your <strong>{len(selected_books)} selected books</strong> across
                 <strong>{len(selected_cats)} categories</strong>, we matched you with a reader

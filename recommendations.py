@@ -358,7 +358,7 @@ def afficher_recommandations(user_id, df_reco, df_enriched):
     </head>
     <body>
 
-        <div class="section-title">✨ Top 10 Recommendations for User {user_id}</div>
+        <div class="section-title">✨ Top 10 Recommendations</div>
         <div class="flip-grid">
             {cards_html}
         </div>
