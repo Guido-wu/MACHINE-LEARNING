@@ -25,7 +25,7 @@ Three model families are explored and compared: **user–user collaborative filt
 
 ---
 
-## 📊 Model Performance Comparison
+## Model Performance Comparison
 
 The table below reports Precision@10 and Recall@10 on the **held-out test set** (last 20% of each user's chronological interactions), evaluated after hyperparameter optimization via grid search on the training split.
 
