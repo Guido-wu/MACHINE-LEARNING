@@ -9,6 +9,7 @@
 
 - **[Video Presentation](#)** — https://youtu.be/MCf6zKJnyjQ
 - **[Google Colab Notebook](https://github.com/Guido-wu/Machine_learning_Group_Omega)** — https://colab.research.google.com/drive/1m-QIjRfkvamJUsVyGbkgqmeCpp28SIvC?usp=sharing
+- The bookworm app : **https://machine-learning-kcexepe8crbfxqo8pbmegq.streamlit.app**
 - The notebook can also be found in the documents before under : Omega_final_version.ipynb
 
 
