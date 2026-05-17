@@ -30,7 +30,7 @@ Three model families are explored and compared: **user–user collaborative filt
 
 The table below reports Precision@10 and Recall@10 on the **held-out test set** (last 20% of each user's chronological interactions), evaluated after hyperparameter optimization via grid search on the training split.
 
-|  | **User–User CF** | **Item–Item CF** | **Content Model**  | **Hybrid Model** *(best)* |
+| Column | **User–User CF** | **Item–Item CF** | **Content Model**  | **Hybrid Model** *(best)* |
 |---|---|---|---|
 | **Precision@10** | 0.0566 | 0.0557 | 0.0606 | **0.0625** |
 | **Recall@10** | 0.2907 | 0.2640 | 0.2908 | **0.3019** |
@@ -310,7 +310,9 @@ jupyter notebook Final_version_Omega-2.ipynb
 
 ## Team
 
-**Team Omega** — Machine Learning Course Project
+**Team Omega**
+
+Machine Learning Course Project
 Vryghem Daphne 
 Würges Guido
 ---
