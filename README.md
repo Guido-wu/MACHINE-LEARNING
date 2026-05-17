@@ -7,7 +7,7 @@
 
 ## Links
 
-- **[Video Presentation](#)** — *(insert your video link here)*
+- **[Video Presentation](#)** — https://youtu.be/MCf6zKJnyjQ
 - **[Google Colab Notebook](https://github.com/Guido-wu/Machine_learning_Group_Omega)** — Full reproducible code
 
 
@@ -313,5 +313,8 @@ jupyter notebook Final_version_Omega-2.ipynb
 Vryghem Daphne 
 Würges Guido
 ---
+
+## Ranking in Kaggle Competition
+11
 
 *This README serves as the project report. All results are reproducible via the linked Colab notebook.*
